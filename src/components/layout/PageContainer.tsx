@@ -1,7 +1,13 @@
 import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 
-export function PageContainer({ title, children }: { title: string; children: ReactNode }) {
+export function PageContainer({ title, children, className, artwork, headerDetails }: {
+  title: string
+  children: ReactNode
+  className?: string
+  artwork?: ReactNode
+  headerDetails?: ReactNode
+}) {
   const heading = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
@@ -9,9 +15,19 @@ export function PageContainer({ title, children }: { title: string; children: Re
     heading.current?.focus()
   }, [title])
 
+  const titleElement = <h1 ref={heading} tabIndex={-1}>{title}</h1>
+
   return (
-    <main className="page-container">
-      <h1 ref={heading} tabIndex={-1}>{title}</h1>
+    <main className={className ? `page-container ${className}` : 'page-container'}>
+      {artwork || headerDetails ? (
+        <header className="page-heading">
+          {artwork}
+          <div>
+            {titleElement}
+            {headerDetails}
+          </div>
+        </header>
+      ) : titleElement}
       {children}
     </main>
   )

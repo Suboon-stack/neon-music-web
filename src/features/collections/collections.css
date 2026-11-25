@@ -1,0 +1,74 @@
+.collection-page .page-heading {
+  display: grid;
+  grid-template-columns: clamp(8rem, 19vw, 15rem) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1rem, 3vw, 2rem);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--color-paper);
+  box-shadow: var(--shadow);
+}
+.collection-page h1 { font-size: clamp(1.85rem, 5vw, 3.75rem); }
+.collection-page .page-heading .home-cover, .collection-playlist-art {
+  border: var(--border);
+  border-radius: var(--radius-sm);
+}
+.collection-playlist-art {
+  display: grid;
+  place-items: center;
+  container-type: inline-size;
+  aspect-ratio: 1;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 11px, rgb(255 250 243 / 23%) 11px 13px),
+    var(--playlist-bg);
+}
+.collection-playlist-art span {
+  max-width: 84%;
+  padding: .25em;
+  border: var(--border);
+  border-radius: .3rem;
+  background: var(--playlist-bg);
+  font-size: 17cqi;
+  font-weight: 900;
+  letter-spacing: -.06em;
+  line-height: 1;
+  text-align: center;
+  text-wrap: balance;
+}
+.collection-description { margin-top: .5rem; }
+.collection-meta { margin-top: .25rem; color: var(--color-muted); }
+.collection-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); margin-top: var(--space-md); }
+.collection-shuffle { gap: .35rem; padding: 0 .65rem; box-shadow: none; font-size: .9rem; }
+.collection-actions .home-play:disabled { opacity: .55; cursor: default; box-shadow: none; }
+.collection-empty { color: var(--color-muted); }
+
+.track-list {
+  display: grid;
+  gap: var(--space-xs);
+  width: min(100%, 52rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.track-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 0;
+  padding: var(--space-xs) var(--space-sm);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
+}
+.track-list [aria-current="true"] { background: var(--color-lavender); }
+.track-number, .track-duration { color: var(--color-muted); font-variant-numeric: tabular-nums; flex: none; }
+.track-number { min-width: 1ch; text-align: center; }
+.track-info { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.track-info small { display: block; color: var(--color-muted); font-size: .875rem; }
+.track-duration { font-size: .875rem; }
+
+@media (max-width: 39rem) {
+  .collection-page .page-heading { grid-template-columns: minmax(0, 1fr); }
+  .collection-page .page-heading .home-cover, .collection-playlist-art { width: min(100%, 9rem); }
+}

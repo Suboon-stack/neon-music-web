@@ -1,3 +1,4 @@
+import { albums, albumPath, playlists, playlistPath } from '../data/homeCatalog'
 import { useSyncExternalStore } from 'react'
 
 interface Route {
@@ -30,7 +31,12 @@ function readPath() {
   return window.location.hash.slice(1) || '/'
 }
 
-export function useRoute() {
+const detailRoutes: Route[] = [
+  ...albums.map((album) => ({ ...routes.album, path: albumPath(album.id), title: album.title })),
+  ...playlists.map((playlist) => ({ ...routes.playlist, path: playlistPath(playlist.id), title: playlist.name })),
+]
+
+export function useRoute(): Route {
   const path = useSyncExternalStore(subscribeToHash, readPath)
-  return Object.values(routes).find((route) => route.path === path) ?? notFound
+  return Object.values(routes).find((route) => route.path === path) ?? detailRoutes.find((route) => route.path === path) ?? notFound
 }
